@@ -1,0 +1,1594 @@
+--
+-- PostgreSQL database dump
+--
+
+SET statement_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+
+--
+-- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
+--
+
+CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
+
+
+--
+-- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
+
+
+SET search_path = public, pg_catalog;
+
+SET default_tablespace = '';
+
+SET default_with_oids = false;
+
+--
+-- Name: appTraining_absence; Type: TABLE; Schema: public; Owner: student; Tablespace: 
+--
+
+CREATE TABLE "appTraining_absence" (
+    id integer NOT NULL,
+    "studId_id" integer NOT NULL,
+    absence boolean NOT NULL
+);
+
+
+ALTER TABLE public."appTraining_absence" OWNER TO student;
+
+--
+-- Name: appTraining_absence_id_seq; Type: SEQUENCE; Schema: public; Owner: student
+--
+
+CREATE SEQUENCE "appTraining_absence_id_seq"
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public."appTraining_absence_id_seq" OWNER TO student;
+
+--
+-- Name: appTraining_absence_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: student
+--
+
+ALTER SEQUENCE "appTraining_absence_id_seq" OWNED BY "appTraining_absence".id;
+
+
+--
+-- Name: appTraining_current; Type: TABLE; Schema: public; Owner: student; Tablespace: 
+--
+
+CREATE TABLE "appTraining_current" (
+    id integer NOT NULL,
+    day date NOT NULL,
+    "subjectId_id" integer NOT NULL,
+    "lecturerId_id" integer NOT NULL
+);
+
+
+ALTER TABLE public."appTraining_current" OWNER TO student;
+
+--
+-- Name: appTraining_current_id_seq; Type: SEQUENCE; Schema: public; Owner: student
+--
+
+CREATE SEQUENCE "appTraining_current_id_seq"
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public."appTraining_current_id_seq" OWNER TO student;
+
+--
+-- Name: appTraining_current_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: student
+--
+
+ALTER SEQUENCE "appTraining_current_id_seq" OWNED BY "appTraining_current".id;
+
+
+--
+-- Name: appTraining_group; Type: TABLE; Schema: public; Owner: student; Tablespace: 
+--
+
+CREATE TABLE "appTraining_group" (
+    id integer NOT NULL,
+    "groupNum" character varying(10) NOT NULL
+);
+
+
+ALTER TABLE public."appTraining_group" OWNER TO student;
+
+--
+-- Name: appTraining_group_id_seq; Type: SEQUENCE; Schema: public; Owner: student
+--
+
+CREATE SEQUENCE "appTraining_group_id_seq"
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public."appTraining_group_id_seq" OWNER TO student;
+
+--
+-- Name: appTraining_group_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: student
+--
+
+ALTER SEQUENCE "appTraining_group_id_seq" OWNED BY "appTraining_group".id;
+
+
+--
+-- Name: appTraining_lectsubj; Type: TABLE; Schema: public; Owner: student; Tablespace: 
+--
+
+CREATE TABLE "appTraining_lectsubj" (
+    id integer NOT NULL,
+    "subjectId_id" integer NOT NULL,
+    "lecturerId_id" integer NOT NULL
+);
+
+
+ALTER TABLE public."appTraining_lectsubj" OWNER TO student;
+
+--
+-- Name: appTraining_lectsubj_id_seq; Type: SEQUENCE; Schema: public; Owner: student
+--
+
+CREATE SEQUENCE "appTraining_lectsubj_id_seq"
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public."appTraining_lectsubj_id_seq" OWNER TO student;
+
+--
+-- Name: appTraining_lectsubj_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: student
+--
+
+ALTER SEQUENCE "appTraining_lectsubj_id_seq" OWNED BY "appTraining_lectsubj".id;
+
+
+--
+-- Name: appTraining_lecturer; Type: TABLE; Schema: public; Owner: student; Tablespace: 
+--
+
+CREATE TABLE "appTraining_lecturer" (
+    id integer NOT NULL,
+    name character varying(15) NOT NULL,
+    surname character varying(20) NOT NULL,
+    "phoneNum" character varying(15) NOT NULL,
+    email character varying(30) NOT NULL
+);
+
+
+ALTER TABLE public."appTraining_lecturer" OWNER TO student;
+
+--
+-- Name: appTraining_lecturer_id_seq; Type: SEQUENCE; Schema: public; Owner: student
+--
+
+CREATE SEQUENCE "appTraining_lecturer_id_seq"
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public."appTraining_lecturer_id_seq" OWNER TO student;
+
+--
+-- Name: appTraining_lecturer_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: student
+--
+
+ALTER SEQUENCE "appTraining_lecturer_id_seq" OWNED BY "appTraining_lecturer".id;
+
+
+--
+-- Name: appTraining_log; Type: TABLE; Schema: public; Owner: student; Tablespace: 
+--
+
+CREATE TABLE "appTraining_log" (
+    id integer NOT NULL,
+    mark integer NOT NULL,
+    "studId_id" integer NOT NULL,
+    "currentId_id" integer NOT NULL
+);
+
+
+ALTER TABLE public."appTraining_log" OWNER TO student;
+
+--
+-- Name: appTraining_log_id_seq; Type: SEQUENCE; Schema: public; Owner: student
+--
+
+CREATE SEQUENCE "appTraining_log_id_seq"
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public."appTraining_log_id_seq" OWNER TO student;
+
+--
+-- Name: appTraining_log_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: student
+--
+
+ALTER SEQUENCE "appTraining_log_id_seq" OWNED BY "appTraining_log".id;
+
+
+--
+-- Name: appTraining_student; Type: TABLE; Schema: public; Owner: student; Tablespace: 
+--
+
+CREATE TABLE "appTraining_student" (
+    id integer NOT NULL,
+    name character varying(15) NOT NULL,
+    surname character varying(20) NOT NULL,
+    "groupId_id" integer NOT NULL,
+    "phoneNum" character varying(15) NOT NULL,
+    email character varying(30) NOT NULL
+);
+
+
+ALTER TABLE public."appTraining_student" OWNER TO student;
+
+--
+-- Name: appTraining_student_id_seq; Type: SEQUENCE; Schema: public; Owner: student
+--
+
+CREATE SEQUENCE "appTraining_student_id_seq"
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public."appTraining_student_id_seq" OWNER TO student;
+
+--
+-- Name: appTraining_student_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: student
+--
+
+ALTER SEQUENCE "appTraining_student_id_seq" OWNED BY "appTraining_student".id;
+
+
+--
+-- Name: appTraining_subject; Type: TABLE; Schema: public; Owner: student; Tablespace: 
+--
+
+CREATE TABLE "appTraining_subject" (
+    id integer NOT NULL,
+    name character varying(15) NOT NULL,
+    hours integer NOT NULL
+);
+
+
+ALTER TABLE public."appTraining_subject" OWNER TO student;
+
+--
+-- Name: appTraining_subject_id_seq; Type: SEQUENCE; Schema: public; Owner: student
+--
+
+CREATE SEQUENCE "appTraining_subject_id_seq"
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public."appTraining_subject_id_seq" OWNER TO student;
+
+--
+-- Name: appTraining_subject_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: student
+--
+
+ALTER SEQUENCE "appTraining_subject_id_seq" OWNED BY "appTraining_subject".id;
+
+
+--
+-- Name: auth_group; Type: TABLE; Schema: public; Owner: student; Tablespace: 
+--
+
+CREATE TABLE auth_group (
+    id integer NOT NULL,
+    name character varying(80) NOT NULL
+);
+
+
+ALTER TABLE public.auth_group OWNER TO student;
+
+--
+-- Name: auth_group_id_seq; Type: SEQUENCE; Schema: public; Owner: student
+--
+
+CREATE SEQUENCE auth_group_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.auth_group_id_seq OWNER TO student;
+
+--
+-- Name: auth_group_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: student
+--
+
+ALTER SEQUENCE auth_group_id_seq OWNED BY auth_group.id;
+
+
+--
+-- Name: auth_group_permissions; Type: TABLE; Schema: public; Owner: student; Tablespace: 
+--
+
+CREATE TABLE auth_group_permissions (
+    id integer NOT NULL,
+    group_id integer NOT NULL,
+    permission_id integer NOT NULL
+);
+
+
+ALTER TABLE public.auth_group_permissions OWNER TO student;
+
+--
+-- Name: auth_group_permissions_id_seq; Type: SEQUENCE; Schema: public; Owner: student
+--
+
+CREATE SEQUENCE auth_group_permissions_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.auth_group_permissions_id_seq OWNER TO student;
+
+--
+-- Name: auth_group_permissions_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: student
+--
+
+ALTER SEQUENCE auth_group_permissions_id_seq OWNED BY auth_group_permissions.id;
+
+
+--
+-- Name: auth_permission; Type: TABLE; Schema: public; Owner: student; Tablespace: 
+--
+
+CREATE TABLE auth_permission (
+    id integer NOT NULL,
+    name character varying(50) NOT NULL,
+    content_type_id integer NOT NULL,
+    codename character varying(100) NOT NULL
+);
+
+
+ALTER TABLE public.auth_permission OWNER TO student;
+
+--
+-- Name: auth_permission_id_seq; Type: SEQUENCE; Schema: public; Owner: student
+--
+
+CREATE SEQUENCE auth_permission_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.auth_permission_id_seq OWNER TO student;
+
+--
+-- Name: auth_permission_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: student
+--
+
+ALTER SEQUENCE auth_permission_id_seq OWNED BY auth_permission.id;
+
+
+--
+-- Name: auth_user; Type: TABLE; Schema: public; Owner: student; Tablespace: 
+--
+
+CREATE TABLE auth_user (
+    id integer NOT NULL,
+    password character varying(128) NOT NULL,
+    last_login timestamp with time zone NOT NULL,
+    is_superuser boolean NOT NULL,
+    username character varying(30) NOT NULL,
+    first_name character varying(30) NOT NULL,
+    last_name character varying(30) NOT NULL,
+    email character varying(75) NOT NULL,
+    is_staff boolean NOT NULL,
+    is_active boolean NOT NULL,
+    date_joined timestamp with time zone NOT NULL
+);
+
+
+ALTER TABLE public.auth_user OWNER TO student;
+
+--
+-- Name: auth_user_groups; Type: TABLE; Schema: public; Owner: student; Tablespace: 
+--
+
+CREATE TABLE auth_user_groups (
+    id integer NOT NULL,
+    user_id integer NOT NULL,
+    group_id integer NOT NULL
+);
+
+
+ALTER TABLE public.auth_user_groups OWNER TO student;
+
+--
+-- Name: auth_user_groups_id_seq; Type: SEQUENCE; Schema: public; Owner: student
+--
+
+CREATE SEQUENCE auth_user_groups_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.auth_user_groups_id_seq OWNER TO student;
+
+--
+-- Name: auth_user_groups_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: student
+--
+
+ALTER SEQUENCE auth_user_groups_id_seq OWNED BY auth_user_groups.id;
+
+
+--
+-- Name: auth_user_id_seq; Type: SEQUENCE; Schema: public; Owner: student
+--
+
+CREATE SEQUENCE auth_user_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.auth_user_id_seq OWNER TO student;
+
+--
+-- Name: auth_user_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: student
+--
+
+ALTER SEQUENCE auth_user_id_seq OWNED BY auth_user.id;
+
+
+--
+-- Name: auth_user_user_permissions; Type: TABLE; Schema: public; Owner: student; Tablespace: 
+--
+
+CREATE TABLE auth_user_user_permissions (
+    id integer NOT NULL,
+    user_id integer NOT NULL,
+    permission_id integer NOT NULL
+);
+
+
+ALTER TABLE public.auth_user_user_permissions OWNER TO student;
+
+--
+-- Name: auth_user_user_permissions_id_seq; Type: SEQUENCE; Schema: public; Owner: student
+--
+
+CREATE SEQUENCE auth_user_user_permissions_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.auth_user_user_permissions_id_seq OWNER TO student;
+
+--
+-- Name: auth_user_user_permissions_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: student
+--
+
+ALTER SEQUENCE auth_user_user_permissions_id_seq OWNED BY auth_user_user_permissions.id;
+
+
+--
+-- Name: django_admin_log; Type: TABLE; Schema: public; Owner: student; Tablespace: 
+--
+
+CREATE TABLE django_admin_log (
+    id integer NOT NULL,
+    action_time timestamp with time zone NOT NULL,
+    user_id integer NOT NULL,
+    content_type_id integer,
+    object_id text,
+    object_repr character varying(200) NOT NULL,
+    action_flag smallint NOT NULL,
+    change_message text NOT NULL,
+    CONSTRAINT django_admin_log_action_flag_check CHECK ((action_flag >= 0))
+);
+
+
+ALTER TABLE public.django_admin_log OWNER TO student;
+
+--
+-- Name: django_admin_log_id_seq; Type: SEQUENCE; Schema: public; Owner: student
+--
+
+CREATE SEQUENCE django_admin_log_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.django_admin_log_id_seq OWNER TO student;
+
+--
+-- Name: django_admin_log_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: student
+--
+
+ALTER SEQUENCE django_admin_log_id_seq OWNED BY django_admin_log.id;
+
+
+--
+-- Name: django_content_type; Type: TABLE; Schema: public; Owner: student; Tablespace: 
+--
+
+CREATE TABLE django_content_type (
+    id integer NOT NULL,
+    name character varying(100) NOT NULL,
+    app_label character varying(100) NOT NULL,
+    model character varying(100) NOT NULL
+);
+
+
+ALTER TABLE public.django_content_type OWNER TO student;
+
+--
+-- Name: django_content_type_id_seq; Type: SEQUENCE; Schema: public; Owner: student
+--
+
+CREATE SEQUENCE django_content_type_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.django_content_type_id_seq OWNER TO student;
+
+--
+-- Name: django_content_type_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: student
+--
+
+ALTER SEQUENCE django_content_type_id_seq OWNED BY django_content_type.id;
+
+
+--
+-- Name: django_session; Type: TABLE; Schema: public; Owner: student; Tablespace: 
+--
+
+CREATE TABLE django_session (
+    session_key character varying(40) NOT NULL,
+    session_data text NOT NULL,
+    expire_date timestamp with time zone NOT NULL
+);
+
+
+ALTER TABLE public.django_session OWNER TO student;
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: student
+--
+
+ALTER TABLE ONLY "appTraining_absence" ALTER COLUMN id SET DEFAULT nextval('"appTraining_absence_id_seq"'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: student
+--
+
+ALTER TABLE ONLY "appTraining_current" ALTER COLUMN id SET DEFAULT nextval('"appTraining_current_id_seq"'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: student
+--
+
+ALTER TABLE ONLY "appTraining_group" ALTER COLUMN id SET DEFAULT nextval('"appTraining_group_id_seq"'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: student
+--
+
+ALTER TABLE ONLY "appTraining_lectsubj" ALTER COLUMN id SET DEFAULT nextval('"appTraining_lectsubj_id_seq"'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: student
+--
+
+ALTER TABLE ONLY "appTraining_lecturer" ALTER COLUMN id SET DEFAULT nextval('"appTraining_lecturer_id_seq"'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: student
+--
+
+ALTER TABLE ONLY "appTraining_log" ALTER COLUMN id SET DEFAULT nextval('"appTraining_log_id_seq"'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: student
+--
+
+ALTER TABLE ONLY "appTraining_student" ALTER COLUMN id SET DEFAULT nextval('"appTraining_student_id_seq"'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: student
+--
+
+ALTER TABLE ONLY "appTraining_subject" ALTER COLUMN id SET DEFAULT nextval('"appTraining_subject_id_seq"'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: student
+--
+
+ALTER TABLE ONLY auth_group ALTER COLUMN id SET DEFAULT nextval('auth_group_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: student
+--
+
+ALTER TABLE ONLY auth_group_permissions ALTER COLUMN id SET DEFAULT nextval('auth_group_permissions_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: student
+--
+
+ALTER TABLE ONLY auth_permission ALTER COLUMN id SET DEFAULT nextval('auth_permission_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: student
+--
+
+ALTER TABLE ONLY auth_user ALTER COLUMN id SET DEFAULT nextval('auth_user_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: student
+--
+
+ALTER TABLE ONLY auth_user_groups ALTER COLUMN id SET DEFAULT nextval('auth_user_groups_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: student
+--
+
+ALTER TABLE ONLY auth_user_user_permissions ALTER COLUMN id SET DEFAULT nextval('auth_user_user_permissions_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: student
+--
+
+ALTER TABLE ONLY django_admin_log ALTER COLUMN id SET DEFAULT nextval('django_admin_log_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: student
+--
+
+ALTER TABLE ONLY django_content_type ALTER COLUMN id SET DEFAULT nextval('django_content_type_id_seq'::regclass);
+
+
+--
+-- Data for Name: appTraining_absence; Type: TABLE DATA; Schema: public; Owner: student
+--
+
+COPY "appTraining_absence" (id, "studId_id", absence) FROM stdin;
+\.
+
+
+--
+-- Name: appTraining_absence_id_seq; Type: SEQUENCE SET; Schema: public; Owner: student
+--
+
+SELECT pg_catalog.setval('"appTraining_absence_id_seq"', 1, false);
+
+
+--
+-- Data for Name: appTraining_current; Type: TABLE DATA; Schema: public; Owner: student
+--
+
+COPY "appTraining_current" (id, day, "subjectId_id", "lecturerId_id") FROM stdin;
+1	2014-06-16	3	47
+2	2014-06-12	1	47
+3	2014-06-10	5	50
+4	2014-06-12	3	48
+5	2014-06-16	2	48
+\.
+
+
+--
+-- Name: appTraining_current_id_seq; Type: SEQUENCE SET; Schema: public; Owner: student
+--
+
+SELECT pg_catalog.setval('"appTraining_current_id_seq"', 5, true);
+
+
+--
+-- Data for Name: appTraining_group; Type: TABLE DATA; Schema: public; Owner: student
+--
+
+COPY "appTraining_group" (id, "groupNum") FROM stdin;
+1	group1
+8	group2
+10	group4
+9	group3
+\.
+
+
+--
+-- Name: appTraining_group_id_seq; Type: SEQUENCE SET; Schema: public; Owner: student
+--
+
+SELECT pg_catalog.setval('"appTraining_group_id_seq"', 10, true);
+
+
+--
+-- Data for Name: appTraining_lectsubj; Type: TABLE DATA; Schema: public; Owner: student
+--
+
+COPY "appTraining_lectsubj" (id, "subjectId_id", "lecturerId_id") FROM stdin;
+1	4	49
+\.
+
+
+--
+-- Name: appTraining_lectsubj_id_seq; Type: SEQUENCE SET; Schema: public; Owner: student
+--
+
+SELECT pg_catalog.setval('"appTraining_lectsubj_id_seq"', 1, true);
+
+
+--
+-- Data for Name: appTraining_lecturer; Type: TABLE DATA; Schema: public; Owner: student
+--
+
+COPY "appTraining_lecturer" (id, name, surname, "phoneNum", email) FROM stdin;
+47	Sergo	Xaratyan	099 751-349	xaratyan_sergo@mail.ru
+48	Edik	Tumanyan	099 909-999	etumanyan@mail.ru
+49	Samvel	Apresyan	077 000-777	apresyan.samvel@mail.ru
+50	Suren	Eqsuzyan	055 782-845	eqsuzyansuren@mail.ru
+\.
+
+
+--
+-- Name: appTraining_lecturer_id_seq; Type: SEQUENCE SET; Schema: public; Owner: student
+--
+
+SELECT pg_catalog.setval('"appTraining_lecturer_id_seq"', 50, true);
+
+
+--
+-- Data for Name: appTraining_log; Type: TABLE DATA; Schema: public; Owner: student
+--
+
+COPY "appTraining_log" (id, mark, "studId_id", "currentId_id") FROM stdin;
+7	58	6	1
+8	7	6	3
+\.
+
+
+--
+-- Name: appTraining_log_id_seq; Type: SEQUENCE SET; Schema: public; Owner: student
+--
+
+SELECT pg_catalog.setval('"appTraining_log_id_seq"', 8, true);
+
+
+--
+-- Data for Name: appTraining_student; Type: TABLE DATA; Schema: public; Owner: student
+--
+
+COPY "appTraining_student" (id, name, surname, "groupId_id", "phoneNum", email) FROM stdin;
+7	Edmon	Ayvazyan	1	055 789-265	edmon_yan@mail.ru
+6	Naira	Poxosyan	8	1-02	pnairai28@mail.ru
+8	Anna	Grigoryan	9	094 985-125	annaanna@gmail.com
+9	Artur	Mailyan	1	097 325-324	arturik@mail.ru
+\.
+
+
+--
+-- Name: appTraining_student_id_seq; Type: SEQUENCE SET; Schema: public; Owner: student
+--
+
+SELECT pg_catalog.setval('"appTraining_student_id_seq"', 9, true);
+
+
+--
+-- Data for Name: appTraining_subject; Type: TABLE DATA; Schema: public; Owner: student
+--
+
+COPY "appTraining_subject" (id, name, hours) FROM stdin;
+1	Informatics	24
+2	Mathematics	34
+3	Literature	16
+4	Phisics	36
+5	History	20
+\.
+
+
+--
+-- Name: appTraining_subject_id_seq; Type: SEQUENCE SET; Schema: public; Owner: student
+--
+
+SELECT pg_catalog.setval('"appTraining_subject_id_seq"', 5, true);
+
+
+--
+-- Data for Name: auth_group; Type: TABLE DATA; Schema: public; Owner: student
+--
+
+COPY auth_group (id, name) FROM stdin;
+\.
+
+
+--
+-- Name: auth_group_id_seq; Type: SEQUENCE SET; Schema: public; Owner: student
+--
+
+SELECT pg_catalog.setval('auth_group_id_seq', 1, false);
+
+
+--
+-- Data for Name: auth_group_permissions; Type: TABLE DATA; Schema: public; Owner: student
+--
+
+COPY auth_group_permissions (id, group_id, permission_id) FROM stdin;
+\.
+
+
+--
+-- Name: auth_group_permissions_id_seq; Type: SEQUENCE SET; Schema: public; Owner: student
+--
+
+SELECT pg_catalog.setval('auth_group_permissions_id_seq', 1, false);
+
+
+--
+-- Data for Name: auth_permission; Type: TABLE DATA; Schema: public; Owner: student
+--
+
+COPY auth_permission (id, name, content_type_id, codename) FROM stdin;
+1	Can add log entry	1	add_logentry
+2	Can change log entry	1	change_logentry
+3	Can delete log entry	1	delete_logentry
+4	Can add permission	2	add_permission
+5	Can change permission	2	change_permission
+6	Can delete permission	2	delete_permission
+7	Can add group	3	add_group
+8	Can change group	3	change_group
+9	Can delete group	3	delete_group
+10	Can add user	4	add_user
+11	Can change user	4	change_user
+12	Can delete user	4	delete_user
+13	Can add content type	5	add_contenttype
+14	Can change content type	5	change_contenttype
+15	Can delete content type	5	delete_contenttype
+16	Can add session	6	add_session
+17	Can change session	6	change_session
+18	Can delete session	6	delete_session
+19	Can add lecturer	7	add_lecturer
+20	Can change lecturer	7	change_lecturer
+21	Can delete lecturer	7	delete_lecturer
+22	Can add subject	8	add_subject
+23	Can change subject	8	change_subject
+24	Can delete subject	8	delete_subject
+25	Can add lect subj	9	add_lectsubj
+26	Can change lect subj	9	change_lectsubj
+27	Can delete lect subj	9	delete_lectsubj
+28	Can add group	10	add_group
+29	Can change group	10	change_group
+30	Can delete group	10	delete_group
+31	Can add student	11	add_student
+32	Can change student	11	change_student
+33	Can delete student	11	delete_student
+34	Can add current	12	add_current
+35	Can change current	12	change_current
+36	Can delete current	12	delete_current
+37	Can add log	13	add_log
+38	Can change log	13	change_log
+39	Can delete log	13	delete_log
+40	Can add absence	14	add_absence
+41	Can change absence	14	change_absence
+42	Can delete absence	14	delete_absence
+\.
+
+
+--
+-- Name: auth_permission_id_seq; Type: SEQUENCE SET; Schema: public; Owner: student
+--
+
+SELECT pg_catalog.setval('auth_permission_id_seq', 42, true);
+
+
+--
+-- Data for Name: auth_user; Type: TABLE DATA; Schema: public; Owner: student
+--
+
+COPY auth_user (id, password, last_login, is_superuser, username, first_name, last_name, email, is_staff, is_active, date_joined) FROM stdin;
+1	pbkdf2_sha256$12000$XZ8H3Z5GRJsY$yXeGqPOJu2bi2xtnt/xV0ypKuUCPZ3qrKjU56C5JTs4=	2014-06-16 14:53:13.714837+04	t	student				t	t	2014-06-15 21:24:13.833467+04
+\.
+
+
+--
+-- Data for Name: auth_user_groups; Type: TABLE DATA; Schema: public; Owner: student
+--
+
+COPY auth_user_groups (id, user_id, group_id) FROM stdin;
+\.
+
+
+--
+-- Name: auth_user_groups_id_seq; Type: SEQUENCE SET; Schema: public; Owner: student
+--
+
+SELECT pg_catalog.setval('auth_user_groups_id_seq', 1, false);
+
+
+--
+-- Name: auth_user_id_seq; Type: SEQUENCE SET; Schema: public; Owner: student
+--
+
+SELECT pg_catalog.setval('auth_user_id_seq', 1, true);
+
+
+--
+-- Data for Name: auth_user_user_permissions; Type: TABLE DATA; Schema: public; Owner: student
+--
+
+COPY auth_user_user_permissions (id, user_id, permission_id) FROM stdin;
+\.
+
+
+--
+-- Name: auth_user_user_permissions_id_seq; Type: SEQUENCE SET; Schema: public; Owner: student
+--
+
+SELECT pg_catalog.setval('auth_user_user_permissions_id_seq', 1, false);
+
+
+--
+-- Data for Name: django_admin_log; Type: TABLE DATA; Schema: public; Owner: student
+--
+
+COPY django_admin_log (id, action_time, user_id, content_type_id, object_id, object_repr, action_flag, change_message) FROM stdin;
+1	2014-06-16 15:32:53.186235+04	1	8	1	Subject object	1	
+2	2014-06-16 15:32:57.035962+04	1	8	1	Subject object	2	No fields changed.
+3	2014-06-16 15:33:52.649908+04	1	8	2	Subject object	1	
+4	2014-06-16 15:34:24.881558+04	1	8	3	Subject object	1	
+5	2014-06-16 15:34:47.450275+04	1	8	4	Subject object	1	
+6	2014-06-16 15:36:03.924635+04	1	8	5	Subject object	1	
+7	2014-06-16 15:37:18.845674+04	1	7	46	Lecturer object	3	
+8	2014-06-16 15:37:36.905771+04	1	7	43	Lecturer object	3	
+9	2014-06-16 15:37:50.041779+04	1	7	45	Lecturer object	3	
+10	2014-06-16 15:38:03.612137+04	1	7	44	Lecturer object	3	
+11	2014-06-16 15:38:17.483288+04	1	7	42	Lecturer object	3	
+12	2014-06-16 15:38:24.567733+04	1	7	41	Lecturer object	3	
+13	2014-06-16 15:38:38.217843+04	1	7	40	Lecturer object	3	
+14	2014-06-16 15:40:15.530032+04	1	7	47	Lecturer object	1	
+15	2014-06-16 15:42:29.824371+04	1	7	48	Lecturer object	1	
+16	2014-06-16 15:43:28.130779+04	1	7	49	Lecturer object	1	
+17	2014-06-16 15:44:39.238526+04	1	7	50	Lecturer object	1	
+18	2014-06-16 15:46:45.812399+04	1	9	1	LectSubj object	1	
+19	2014-06-16 16:04:43.651062+04	1	11	1	Student object	1	
+20	2014-06-16 16:06:45.703989+04	1	11	2	Student object	1	
+21	2014-06-16 16:08:10.775696+04	1	11	3	Student object	1	
+22	2014-06-16 16:12:42.854757+04	1	11	4	Student object	1	
+23	2014-06-16 16:14:50.358063+04	1	11	5	Student object	1	
+24	2014-06-16 16:23:46.554565+04	1	12	1	Current object	1	
+25	2014-06-16 16:24:03.679023+04	1	12	2	Current object	1	
+26	2014-06-16 16:24:25.138719+04	1	12	3	Current object	1	
+27	2014-06-16 16:25:16.348548+04	1	12	4	Current object	1	
+28	2014-06-16 16:25:42.747632+04	1	12	5	Current object	1	
+29	2014-06-16 16:26:08.40274+04	1	13	1	Log object	1	
+30	2014-06-16 16:26:19.090272+04	1	13	2	Log object	1	
+31	2014-06-16 16:26:42.725199+04	1	13	3	Log object	1	
+32	2014-06-16 16:27:10.484197+04	1	13	4	Log object	1	
+33	2014-06-16 16:28:09.823184+04	1	13	5	Log object	1	
+34	2014-06-16 16:28:25.558828+04	1	13	6	Log object	1	
+35	2014-06-16 16:35:32.491195+04	1	10	7	Group object	3	
+36	2014-06-16 16:35:32.520619+04	1	10	6	Group object	3	
+37	2014-06-16 16:35:32.529329+04	1	10	5	Group object	3	
+38	2014-06-16 16:35:32.537213+04	1	10	4	Group object	3	
+39	2014-06-16 16:35:32.545727+04	1	10	3	Group object	3	
+40	2014-06-16 16:35:32.553898+04	1	10	2	Group object	3	
+41	2014-06-16 16:35:47.058272+04	1	10	8	Group object	1	
+42	2014-06-16 16:35:58.313999+04	1	10	9	Group object	1	
+43	2014-06-16 16:36:07.702799+04	1	10	10	Group object	1	
+44	2014-06-16 16:36:18.616423+04	1	10	9	Group object	2	Changed groupNum.
+45	2014-06-16 16:36:27.44842+04	1	10	9	Group object	2	Changed groupNum.
+46	2014-06-16 16:43:10.95741+04	1	9	1	LectSubj object	2	Changed subjectId.
+47	2014-06-16 16:47:09.708415+04	1	11	6	Student object	1	
+48	2014-06-16 16:47:26.020128+04	1	13	7	Log object	1	
+49	2014-06-16 16:59:10.237016+04	1	13	8	Log object	1	
+50	2014-06-16 17:07:24.613844+04	1	11	7	Student object	1	
+51	2014-06-16 17:07:44.829593+04	1	11	6	Student object	2	Changed surname.
+52	2014-06-16 17:08:35.98105+04	1	11	8	Student object	1	
+53	2014-06-16 17:09:11.863678+04	1	11	9	Student object	1	
+\.
+
+
+--
+-- Name: django_admin_log_id_seq; Type: SEQUENCE SET; Schema: public; Owner: student
+--
+
+SELECT pg_catalog.setval('django_admin_log_id_seq', 53, true);
+
+
+--
+-- Data for Name: django_content_type; Type: TABLE DATA; Schema: public; Owner: student
+--
+
+COPY django_content_type (id, name, app_label, model) FROM stdin;
+1	log entry	admin	logentry
+2	permission	auth	permission
+3	group	auth	group
+4	user	auth	user
+5	content type	contenttypes	contenttype
+6	session	sessions	session
+7	lecturer	appTraining	lecturer
+8	subject	appTraining	subject
+9	lect subj	appTraining	lectsubj
+10	group	appTraining	group
+11	student	appTraining	student
+12	current	appTraining	current
+13	log	appTraining	log
+14	absence	appTraining	absence
+\.
+
+
+--
+-- Name: django_content_type_id_seq; Type: SEQUENCE SET; Schema: public; Owner: student
+--
+
+SELECT pg_catalog.setval('django_content_type_id_seq', 14, true);
+
+
+--
+-- Data for Name: django_session; Type: TABLE DATA; Schema: public; Owner: student
+--
+
+COPY django_session (session_key, session_data, expire_date) FROM stdin;
+vaqiki8n2h198ybz1b5utanymk4o2nqq	YmQ0MTQyNmZjYzc5MzYxYzk0YTVhNDQ4Y2FlNDY5YmFkYmQ1NDYzNDp7Il9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIiwiX2F1dGhfdXNlcl9pZCI6MX0=	2014-06-30 00:01:07.192931+04
+ox9prik3w5xp12y2kwn85615eximysvd	YmQ0MTQyNmZjYzc5MzYxYzk0YTVhNDQ4Y2FlNDY5YmFkYmQ1NDYzNDp7Il9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIiwiX2F1dGhfdXNlcl9pZCI6MX0=	2014-06-30 14:53:13.723346+04
+\.
+
+
+--
+-- Name: appTraining_absence_pkey; Type: CONSTRAINT; Schema: public; Owner: student; Tablespace: 
+--
+
+ALTER TABLE ONLY "appTraining_absence"
+    ADD CONSTRAINT "appTraining_absence_pkey" PRIMARY KEY (id);
+
+
+--
+-- Name: appTraining_current_pkey; Type: CONSTRAINT; Schema: public; Owner: student; Tablespace: 
+--
+
+ALTER TABLE ONLY "appTraining_current"
+    ADD CONSTRAINT "appTraining_current_pkey" PRIMARY KEY (id);
+
+
+--
+-- Name: appTraining_group_pkey; Type: CONSTRAINT; Schema: public; Owner: student; Tablespace: 
+--
+
+ALTER TABLE ONLY "appTraining_group"
+    ADD CONSTRAINT "appTraining_group_pkey" PRIMARY KEY (id);
+
+
+--
+-- Name: appTraining_lectsubj_pkey; Type: CONSTRAINT; Schema: public; Owner: student; Tablespace: 
+--
+
+ALTER TABLE ONLY "appTraining_lectsubj"
+    ADD CONSTRAINT "appTraining_lectsubj_pkey" PRIMARY KEY (id);
+
+
+--
+-- Name: appTraining_lecturer_pkey; Type: CONSTRAINT; Schema: public; Owner: student; Tablespace: 
+--
+
+ALTER TABLE ONLY "appTraining_lecturer"
+    ADD CONSTRAINT "appTraining_lecturer_pkey" PRIMARY KEY (id);
+
+
+--
+-- Name: appTraining_log_pkey; Type: CONSTRAINT; Schema: public; Owner: student; Tablespace: 
+--
+
+ALTER TABLE ONLY "appTraining_log"
+    ADD CONSTRAINT "appTraining_log_pkey" PRIMARY KEY (id);
+
+
+--
+-- Name: appTraining_student_pkey; Type: CONSTRAINT; Schema: public; Owner: student; Tablespace: 
+--
+
+ALTER TABLE ONLY "appTraining_student"
+    ADD CONSTRAINT "appTraining_student_pkey" PRIMARY KEY (id);
+
+
+--
+-- Name: appTraining_subject_pkey; Type: CONSTRAINT; Schema: public; Owner: student; Tablespace: 
+--
+
+ALTER TABLE ONLY "appTraining_subject"
+    ADD CONSTRAINT "appTraining_subject_pkey" PRIMARY KEY (id);
+
+
+--
+-- Name: auth_group_name_key; Type: CONSTRAINT; Schema: public; Owner: student; Tablespace: 
+--
+
+ALTER TABLE ONLY auth_group
+    ADD CONSTRAINT auth_group_name_key UNIQUE (name);
+
+
+--
+-- Name: auth_group_permissions_group_id_permission_id_key; Type: CONSTRAINT; Schema: public; Owner: student; Tablespace: 
+--
+
+ALTER TABLE ONLY auth_group_permissions
+    ADD CONSTRAINT auth_group_permissions_group_id_permission_id_key UNIQUE (group_id, permission_id);
+
+
+--
+-- Name: auth_group_permissions_pkey; Type: CONSTRAINT; Schema: public; Owner: student; Tablespace: 
+--
+
+ALTER TABLE ONLY auth_group_permissions
+    ADD CONSTRAINT auth_group_permissions_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: auth_group_pkey; Type: CONSTRAINT; Schema: public; Owner: student; Tablespace: 
+--
+
+ALTER TABLE ONLY auth_group
+    ADD CONSTRAINT auth_group_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: auth_permission_content_type_id_codename_key; Type: CONSTRAINT; Schema: public; Owner: student; Tablespace: 
+--
+
+ALTER TABLE ONLY auth_permission
+    ADD CONSTRAINT auth_permission_content_type_id_codename_key UNIQUE (content_type_id, codename);
+
+
+--
+-- Name: auth_permission_pkey; Type: CONSTRAINT; Schema: public; Owner: student; Tablespace: 
+--
+
+ALTER TABLE ONLY auth_permission
+    ADD CONSTRAINT auth_permission_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: auth_user_groups_pkey; Type: CONSTRAINT; Schema: public; Owner: student; Tablespace: 
+--
+
+ALTER TABLE ONLY auth_user_groups
+    ADD CONSTRAINT auth_user_groups_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: auth_user_groups_user_id_group_id_key; Type: CONSTRAINT; Schema: public; Owner: student; Tablespace: 
+--
+
+ALTER TABLE ONLY auth_user_groups
+    ADD CONSTRAINT auth_user_groups_user_id_group_id_key UNIQUE (user_id, group_id);
+
+
+--
+-- Name: auth_user_pkey; Type: CONSTRAINT; Schema: public; Owner: student; Tablespace: 
+--
+
+ALTER TABLE ONLY auth_user
+    ADD CONSTRAINT auth_user_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: auth_user_user_permissions_pkey; Type: CONSTRAINT; Schema: public; Owner: student; Tablespace: 
+--
+
+ALTER TABLE ONLY auth_user_user_permissions
+    ADD CONSTRAINT auth_user_user_permissions_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: auth_user_user_permissions_user_id_permission_id_key; Type: CONSTRAINT; Schema: public; Owner: student; Tablespace: 
+--
+
+ALTER TABLE ONLY auth_user_user_permissions
+    ADD CONSTRAINT auth_user_user_permissions_user_id_permission_id_key UNIQUE (user_id, permission_id);
+
+
+--
+-- Name: auth_user_username_key; Type: CONSTRAINT; Schema: public; Owner: student; Tablespace: 
+--
+
+ALTER TABLE ONLY auth_user
+    ADD CONSTRAINT auth_user_username_key UNIQUE (username);
+
+
+--
+-- Name: django_admin_log_pkey; Type: CONSTRAINT; Schema: public; Owner: student; Tablespace: 
+--
+
+ALTER TABLE ONLY django_admin_log
+    ADD CONSTRAINT django_admin_log_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: django_content_type_app_label_model_key; Type: CONSTRAINT; Schema: public; Owner: student; Tablespace: 
+--
+
+ALTER TABLE ONLY django_content_type
+    ADD CONSTRAINT django_content_type_app_label_model_key UNIQUE (app_label, model);
+
+
+--
+-- Name: django_content_type_pkey; Type: CONSTRAINT; Schema: public; Owner: student; Tablespace: 
+--
+
+ALTER TABLE ONLY django_content_type
+    ADD CONSTRAINT django_content_type_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: django_session_pkey; Type: CONSTRAINT; Schema: public; Owner: student; Tablespace: 
+--
+
+ALTER TABLE ONLY django_session
+    ADD CONSTRAINT django_session_pkey PRIMARY KEY (session_key);
+
+
+--
+-- Name: appTraining_absence_studId_id; Type: INDEX; Schema: public; Owner: student; Tablespace: 
+--
+
+CREATE INDEX "appTraining_absence_studId_id" ON "appTraining_absence" USING btree ("studId_id");
+
+
+--
+-- Name: appTraining_current_lecturerId_id; Type: INDEX; Schema: public; Owner: student; Tablespace: 
+--
+
+CREATE INDEX "appTraining_current_lecturerId_id" ON "appTraining_current" USING btree ("lecturerId_id");
+
+
+--
+-- Name: appTraining_current_subjectId_id; Type: INDEX; Schema: public; Owner: student; Tablespace: 
+--
+
+CREATE INDEX "appTraining_current_subjectId_id" ON "appTraining_current" USING btree ("subjectId_id");
+
+
+--
+-- Name: appTraining_lectsubj_lecturerId_id; Type: INDEX; Schema: public; Owner: student; Tablespace: 
+--
+
+CREATE INDEX "appTraining_lectsubj_lecturerId_id" ON "appTraining_lectsubj" USING btree ("lecturerId_id");
+
+
+--
+-- Name: appTraining_lectsubj_subjectId_id; Type: INDEX; Schema: public; Owner: student; Tablespace: 
+--
+
+CREATE INDEX "appTraining_lectsubj_subjectId_id" ON "appTraining_lectsubj" USING btree ("subjectId_id");
+
+
+--
+-- Name: appTraining_log_currentId_id; Type: INDEX; Schema: public; Owner: student; Tablespace: 
+--
+
+CREATE INDEX "appTraining_log_currentId_id" ON "appTraining_log" USING btree ("currentId_id");
+
+
+--
+-- Name: appTraining_log_studId_id; Type: INDEX; Schema: public; Owner: student; Tablespace: 
+--
+
+CREATE INDEX "appTraining_log_studId_id" ON "appTraining_log" USING btree ("studId_id");
+
+
+--
+-- Name: appTraining_student_groupId_id; Type: INDEX; Schema: public; Owner: student; Tablespace: 
+--
+
+CREATE INDEX "appTraining_student_groupId_id" ON "appTraining_student" USING btree ("groupId_id");
+
+
+--
+-- Name: auth_group_name_like; Type: INDEX; Schema: public; Owner: student; Tablespace: 
+--
+
+CREATE INDEX auth_group_name_like ON auth_group USING btree (name varchar_pattern_ops);
+
+
+--
+-- Name: auth_group_permissions_group_id; Type: INDEX; Schema: public; Owner: student; Tablespace: 
+--
+
+CREATE INDEX auth_group_permissions_group_id ON auth_group_permissions USING btree (group_id);
+
+
+--
+-- Name: auth_group_permissions_permission_id; Type: INDEX; Schema: public; Owner: student; Tablespace: 
+--
+
+CREATE INDEX auth_group_permissions_permission_id ON auth_group_permissions USING btree (permission_id);
+
+
+--
+-- Name: auth_permission_content_type_id; Type: INDEX; Schema: public; Owner: student; Tablespace: 
+--
+
+CREATE INDEX auth_permission_content_type_id ON auth_permission USING btree (content_type_id);
+
+
+--
+-- Name: auth_user_groups_group_id; Type: INDEX; Schema: public; Owner: student; Tablespace: 
+--
+
+CREATE INDEX auth_user_groups_group_id ON auth_user_groups USING btree (group_id);
+
+
+--
+-- Name: auth_user_groups_user_id; Type: INDEX; Schema: public; Owner: student; Tablespace: 
+--
+
+CREATE INDEX auth_user_groups_user_id ON auth_user_groups USING btree (user_id);
+
+
+--
+-- Name: auth_user_user_permissions_permission_id; Type: INDEX; Schema: public; Owner: student; Tablespace: 
+--
+
+CREATE INDEX auth_user_user_permissions_permission_id ON auth_user_user_permissions USING btree (permission_id);
+
+
+--
+-- Name: auth_user_user_permissions_user_id; Type: INDEX; Schema: public; Owner: student; Tablespace: 
+--
+
+CREATE INDEX auth_user_user_permissions_user_id ON auth_user_user_permissions USING btree (user_id);
+
+
+--
+-- Name: auth_user_username_like; Type: INDEX; Schema: public; Owner: student; Tablespace: 
+--
+
+CREATE INDEX auth_user_username_like ON auth_user USING btree (username varchar_pattern_ops);
+
+
+--
+-- Name: django_admin_log_content_type_id; Type: INDEX; Schema: public; Owner: student; Tablespace: 
+--
+
+CREATE INDEX django_admin_log_content_type_id ON django_admin_log USING btree (content_type_id);
+
+
+--
+-- Name: django_admin_log_user_id; Type: INDEX; Schema: public; Owner: student; Tablespace: 
+--
+
+CREATE INDEX django_admin_log_user_id ON django_admin_log USING btree (user_id);
+
+
+--
+-- Name: django_session_expire_date; Type: INDEX; Schema: public; Owner: student; Tablespace: 
+--
+
+CREATE INDEX django_session_expire_date ON django_session USING btree (expire_date);
+
+
+--
+-- Name: django_session_session_key_like; Type: INDEX; Schema: public; Owner: student; Tablespace: 
+--
+
+CREATE INDEX django_session_session_key_like ON django_session USING btree (session_key varchar_pattern_ops);
+
+
+--
+-- Name: appTraining_absence_studId_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: student
+--
+
+ALTER TABLE ONLY "appTraining_absence"
+    ADD CONSTRAINT "appTraining_absence_studId_id_fkey" FOREIGN KEY ("studId_id") REFERENCES "appTraining_student"(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: appTraining_current_lecturerId_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: student
+--
+
+ALTER TABLE ONLY "appTraining_current"
+    ADD CONSTRAINT "appTraining_current_lecturerId_id_fkey" FOREIGN KEY ("lecturerId_id") REFERENCES "appTraining_lecturer"(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: appTraining_current_subjectId_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: student
+--
+
+ALTER TABLE ONLY "appTraining_current"
+    ADD CONSTRAINT "appTraining_current_subjectId_id_fkey" FOREIGN KEY ("subjectId_id") REFERENCES "appTraining_subject"(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: appTraining_lectsubj_lecturerId_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: student
+--
+
+ALTER TABLE ONLY "appTraining_lectsubj"
+    ADD CONSTRAINT "appTraining_lectsubj_lecturerId_id_fkey" FOREIGN KEY ("lecturerId_id") REFERENCES "appTraining_lecturer"(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: appTraining_lectsubj_subjectId_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: student
+--
+
+ALTER TABLE ONLY "appTraining_lectsubj"
+    ADD CONSTRAINT "appTraining_lectsubj_subjectId_id_fkey" FOREIGN KEY ("subjectId_id") REFERENCES "appTraining_subject"(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: appTraining_log_currentId_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: student
+--
+
+ALTER TABLE ONLY "appTraining_log"
+    ADD CONSTRAINT "appTraining_log_currentId_id_fkey" FOREIGN KEY ("currentId_id") REFERENCES "appTraining_current"(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: appTraining_log_studId_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: student
+--
+
+ALTER TABLE ONLY "appTraining_log"
+    ADD CONSTRAINT "appTraining_log_studId_id_fkey" FOREIGN KEY ("studId_id") REFERENCES "appTraining_student"(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: appTraining_student_groupId_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: student
+--
+
+ALTER TABLE ONLY "appTraining_student"
+    ADD CONSTRAINT "appTraining_student_groupId_id_fkey" FOREIGN KEY ("groupId_id") REFERENCES "appTraining_group"(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: auth_group_permissions_permission_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: student
+--
+
+ALTER TABLE ONLY auth_group_permissions
+    ADD CONSTRAINT auth_group_permissions_permission_id_fkey FOREIGN KEY (permission_id) REFERENCES auth_permission(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: auth_user_groups_group_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: student
+--
+
+ALTER TABLE ONLY auth_user_groups
+    ADD CONSTRAINT auth_user_groups_group_id_fkey FOREIGN KEY (group_id) REFERENCES auth_group(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: auth_user_user_permissions_permission_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: student
+--
+
+ALTER TABLE ONLY auth_user_user_permissions
+    ADD CONSTRAINT auth_user_user_permissions_permission_id_fkey FOREIGN KEY (permission_id) REFERENCES auth_permission(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: content_type_id_refs_id_93d2d1f8; Type: FK CONSTRAINT; Schema: public; Owner: student
+--
+
+ALTER TABLE ONLY django_admin_log
+    ADD CONSTRAINT content_type_id_refs_id_93d2d1f8 FOREIGN KEY (content_type_id) REFERENCES django_content_type(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: content_type_id_refs_id_d043b34a; Type: FK CONSTRAINT; Schema: public; Owner: student
+--
+
+ALTER TABLE ONLY auth_permission
+    ADD CONSTRAINT content_type_id_refs_id_d043b34a FOREIGN KEY (content_type_id) REFERENCES django_content_type(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: group_id_refs_id_f4b32aac; Type: FK CONSTRAINT; Schema: public; Owner: student
+--
+
+ALTER TABLE ONLY auth_group_permissions
+    ADD CONSTRAINT group_id_refs_id_f4b32aac FOREIGN KEY (group_id) REFERENCES auth_group(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: user_id_refs_id_40c41112; Type: FK CONSTRAINT; Schema: public; Owner: student
+--
+
+ALTER TABLE ONLY auth_user_groups
+    ADD CONSTRAINT user_id_refs_id_40c41112 FOREIGN KEY (user_id) REFERENCES auth_user(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: user_id_refs_id_4dc23c39; Type: FK CONSTRAINT; Schema: public; Owner: student
+--
+
+ALTER TABLE ONLY auth_user_user_permissions
+    ADD CONSTRAINT user_id_refs_id_4dc23c39 FOREIGN KEY (user_id) REFERENCES auth_user(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: user_id_refs_id_c0d12874; Type: FK CONSTRAINT; Schema: public; Owner: student
+--
+
+ALTER TABLE ONLY django_admin_log
+    ADD CONSTRAINT user_id_refs_id_c0d12874 FOREIGN KEY (user_id) REFERENCES auth_user(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: public; Type: ACL; Schema: -; Owner: postgres
+--
+
+REVOKE ALL ON SCHEMA public FROM PUBLIC;
+REVOKE ALL ON SCHEMA public FROM postgres;
+GRANT ALL ON SCHEMA public TO postgres;
+GRANT ALL ON SCHEMA public TO PUBLIC;
+
+
+--
+-- PostgreSQL database dump complete
+--
+
