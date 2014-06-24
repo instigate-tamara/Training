@@ -8,13 +8,12 @@ urlpatterns = patterns('',
     # url(r'^$', 'ProjectTraining.views.home', name='home'),
     # url(r'^blog/', include('blog.urls')),
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^training/lecturer$','appTraining.views.getListLecturer'),
-    url(r'^training$','appTraining.views.Load'),
-    url(r'^training/group$','appTraining.views.getListGroup'),
-    url(r'^training/mark$','appTraining.views.getListLog'),
-    url(r'^training/ssmark$','appTraining.views.getListSSMark'),
-    url(r'^training/subject','appTraining.views.getListSubject')
-
+    url(r'^training/lecturer$','appTraining.views.getListLecturer'), #dacaxosnri masin informacia 
+    url(r'^training$','appTraining.views.Load'),       #Stanal xmberi anunnery
+    url(r'^training/group$','appTraining.views.getListGroup'),   # Stanal xmbi matyan@
+    url(r'^training/subject','appTraining.views.getListSubject'), #Trvac ararkayic 
+    url(r'^training/student$','appTraining.views.getListStudent'), #usanoxneri masin informacia
+#   url(r'^training/uniqueStudent$','appTraining.views.UniqueStud')
 
 
 )

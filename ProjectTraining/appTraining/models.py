@@ -7,12 +7,12 @@ class Lecturer(models.Model):
     surname = models.CharField(max_length = 20)
     phoneNum = models.CharField(max_length = 15)
     email = models.EmailField(max_length = 30)
-
+   
 class Subject(models.Model):
     id = models.AutoField(primary_key = True)
     name = models.CharField(max_length = 15)
     hours = models.IntegerField(default = 0)
-
+   
 class LectSubj(models.Model):
     subjectId = models.ForeignKey(Subject)
     lecturerId = models.ForeignKey(Lecturer)
@@ -20,6 +20,7 @@ class LectSubj(models.Model):
 class Group(models.Model):
     id = models.AutoField(primary_key = True)
     groupNum = models.CharField(max_length = 10)
+   
 
 class GroupSubj(models.Model):
     groupId = models.ForeignKey(Group)

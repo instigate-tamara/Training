@@ -131,6 +131,40 @@ ALTER SEQUENCE "appTraining_group_id_seq" OWNED BY "appTraining_group".id;
 
 
 --
+-- Name: appTraining_groupsubj; Type: TABLE; Schema: public; Owner: student; Tablespace: 
+--
+
+CREATE TABLE "appTraining_groupsubj" (
+    id integer NOT NULL,
+    "groupId_id" integer NOT NULL,
+    "subjectId_id" integer NOT NULL
+);
+
+
+ALTER TABLE public."appTraining_groupsubj" OWNER TO student;
+
+--
+-- Name: appTraining_groupsubj_id_seq; Type: SEQUENCE; Schema: public; Owner: student
+--
+
+CREATE SEQUENCE "appTraining_groupsubj_id_seq"
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public."appTraining_groupsubj_id_seq" OWNER TO student;
+
+--
+-- Name: appTraining_groupsubj_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: student
+--
+
+ALTER SEQUENCE "appTraining_groupsubj_id_seq" OWNED BY "appTraining_groupsubj".id;
+
+
+--
 -- Name: appTraining_lectsubj; Type: TABLE; Schema: public; Owner: student; Tablespace: 
 --
 
@@ -631,6 +665,13 @@ ALTER TABLE ONLY "appTraining_group" ALTER COLUMN id SET DEFAULT nextval('"appTr
 -- Name: id; Type: DEFAULT; Schema: public; Owner: student
 --
 
+ALTER TABLE ONLY "appTraining_groupsubj" ALTER COLUMN id SET DEFAULT nextval('"appTraining_groupsubj_id_seq"'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: student
+--
+
 ALTER TABLE ONLY "appTraining_lectsubj" ALTER COLUMN id SET DEFAULT nextval('"appTraining_lectsubj_id_seq"'::regclass);
 
 
@@ -723,6 +764,11 @@ ALTER TABLE ONLY django_content_type ALTER COLUMN id SET DEFAULT nextval('django
 --
 
 COPY "appTraining_absence" (id, "studId_id", absence) FROM stdin;
+1	10	f
+3	6	f
+5	9	f
+4	8	f
+2	7	f
 \.
 
 
@@ -730,7 +776,7 @@ COPY "appTraining_absence" (id, "studId_id", absence) FROM stdin;
 -- Name: appTraining_absence_id_seq; Type: SEQUENCE SET; Schema: public; Owner: student
 --
 
-SELECT pg_catalog.setval('"appTraining_absence_id_seq"', 1, false);
+SELECT pg_catalog.setval('"appTraining_absence_id_seq"', 5, true);
 
 
 --
@@ -738,6 +784,11 @@ SELECT pg_catalog.setval('"appTraining_absence_id_seq"', 1, false);
 --
 
 COPY "appTraining_current" (id, day, "subjectId_id", "lecturerId_id") FROM stdin;
+1	2014-06-16	3	47
+2	2014-06-12	1	47
+4	2014-06-12	3	48
+5	2014-06-16	2	48
+3	2014-06-10	5	50
 \.
 
 
@@ -745,7 +796,7 @@ COPY "appTraining_current" (id, day, "subjectId_id", "lecturerId_id") FROM stdin
 -- Name: appTraining_current_id_seq; Type: SEQUENCE SET; Schema: public; Owner: student
 --
 
-SELECT pg_catalog.setval('"appTraining_current_id_seq"', 1, false);
+SELECT pg_catalog.setval('"appTraining_current_id_seq"', 6, true);
 
 
 --
@@ -753,6 +804,10 @@ SELECT pg_catalog.setval('"appTraining_current_id_seq"', 1, false);
 --
 
 COPY "appTraining_group" (id, "groupNum") FROM stdin;
+1	group1
+8	group2
+10	group4
+9	group3
 \.
 
 
@@ -760,7 +815,28 @@ COPY "appTraining_group" (id, "groupNum") FROM stdin;
 -- Name: appTraining_group_id_seq; Type: SEQUENCE SET; Schema: public; Owner: student
 --
 
-SELECT pg_catalog.setval('"appTraining_group_id_seq"', 1, false);
+SELECT pg_catalog.setval('"appTraining_group_id_seq"', 10, true);
+
+
+--
+-- Data for Name: appTraining_groupsubj; Type: TABLE DATA; Schema: public; Owner: student
+--
+
+COPY "appTraining_groupsubj" (id, "groupId_id", "subjectId_id") FROM stdin;
+15	8	2
+16	8	2
+17	10	1
+18	1	5
+19	9	1
+20	9	3
+\.
+
+
+--
+-- Name: appTraining_groupsubj_id_seq; Type: SEQUENCE SET; Schema: public; Owner: student
+--
+
+SELECT pg_catalog.setval('"appTraining_groupsubj_id_seq"', 20, true);
 
 
 --
@@ -768,6 +844,7 @@ SELECT pg_catalog.setval('"appTraining_group_id_seq"', 1, false);
 --
 
 COPY "appTraining_lectsubj" (id, "subjectId_id", "lecturerId_id") FROM stdin;
+1	4	49
 \.
 
 
@@ -775,7 +852,7 @@ COPY "appTraining_lectsubj" (id, "subjectId_id", "lecturerId_id") FROM stdin;
 -- Name: appTraining_lectsubj_id_seq; Type: SEQUENCE SET; Schema: public; Owner: student
 --
 
-SELECT pg_catalog.setval('"appTraining_lectsubj_id_seq"', 1, false);
+SELECT pg_catalog.setval('"appTraining_lectsubj_id_seq"', 1, true);
 
 
 --
@@ -783,10 +860,10 @@ SELECT pg_catalog.setval('"appTraining_lectsubj_id_seq"', 1, false);
 --
 
 COPY "appTraining_lecturer" (id, name, surname, "phoneNum", email) FROM stdin;
-40	Sergo	Xaratyan	096 147-382	esim@mail.ru
-41	Joe	Xaratyan	096 147-382	esim@mail.ru
-42	Joe	Xaratyan	096 147-382	esim@mail.ru
-43	Joe	Xaratyan	096 147-382	esim@mail.ru
+47	Sergo	Xaratyan	099 751-349	xaratyan_sergo@mail.ru
+48	Edik	Tumanyan	099 909-999	etumanyan@mail.ru
+49	Samvel	Apresyan	077 000-777	apresyan.samvel@mail.ru
+50	Suren	Eqsuzyan	055 782-845	eqsuzyansuren@mail.ru
 \.
 
 
@@ -794,7 +871,7 @@ COPY "appTraining_lecturer" (id, name, surname, "phoneNum", email) FROM stdin;
 -- Name: appTraining_lecturer_id_seq; Type: SEQUENCE SET; Schema: public; Owner: student
 --
 
-SELECT pg_catalog.setval('"appTraining_lecturer_id_seq"', 43, true);
+SELECT pg_catalog.setval('"appTraining_lecturer_id_seq"', 50, true);
 
 
 --
@@ -802,6 +879,8 @@ SELECT pg_catalog.setval('"appTraining_lecturer_id_seq"', 43, true);
 --
 
 COPY "appTraining_log" (id, mark, "studId_id", "currentId_id") FROM stdin;
+8	7	6	3
+7	5	10	1
 \.
 
 
@@ -809,7 +888,7 @@ COPY "appTraining_log" (id, mark, "studId_id", "currentId_id") FROM stdin;
 -- Name: appTraining_log_id_seq; Type: SEQUENCE SET; Schema: public; Owner: student
 --
 
-SELECT pg_catalog.setval('"appTraining_log_id_seq"', 1, false);
+SELECT pg_catalog.setval('"appTraining_log_id_seq"', 8, true);
 
 
 --
@@ -817,6 +896,11 @@ SELECT pg_catalog.setval('"appTraining_log_id_seq"', 1, false);
 --
 
 COPY "appTraining_student" (id, name, surname, "groupId_id", "phoneNum", email) FROM stdin;
+7	Edmon	Ayvazyan	1	055 789-265	edmon_yan@mail.ru
+6	Naira	Poxosyan	8	1-02	pnairai28@mail.ru
+8	Anna	Grigoryan	9	094 985-125	annaanna@gmail.com
+9	Artur	Mailyan	1	097 325-324	arturik@mail.ru
+10	Varazdat	Paroyan	8	055 236-459	vrdo.paro@mail.ru
 \.
 
 
@@ -824,7 +908,7 @@ COPY "appTraining_student" (id, name, surname, "groupId_id", "phoneNum", email) 
 -- Name: appTraining_student_id_seq; Type: SEQUENCE SET; Schema: public; Owner: student
 --
 
-SELECT pg_catalog.setval('"appTraining_student_id_seq"', 1, false);
+SELECT pg_catalog.setval('"appTraining_student_id_seq"', 10, true);
 
 
 --
@@ -832,6 +916,11 @@ SELECT pg_catalog.setval('"appTraining_student_id_seq"', 1, false);
 --
 
 COPY "appTraining_subject" (id, name, hours) FROM stdin;
+1	Informatics	24
+2	Mathematics	34
+3	Literature	16
+4	Phisics	36
+5	History	20
 \.
 
 
@@ -839,7 +928,7 @@ COPY "appTraining_subject" (id, name, hours) FROM stdin;
 -- Name: appTraining_subject_id_seq; Type: SEQUENCE SET; Schema: public; Owner: student
 --
 
-SELECT pg_catalog.setval('"appTraining_subject_id_seq"', 1, false);
+SELECT pg_catalog.setval('"appTraining_subject_id_seq"', 6, true);
 
 
 --
@@ -919,6 +1008,9 @@ COPY auth_permission (id, name, content_type_id, codename) FROM stdin;
 40	Can add absence	14	add_absence
 41	Can change absence	14	change_absence
 42	Can delete absence	14	delete_absence
+43	Can add group subj	15	add_groupsubj
+44	Can change group subj	15	change_groupsubj
+45	Can delete group subj	15	delete_groupsubj
 \.
 
 
@@ -926,7 +1018,7 @@ COPY auth_permission (id, name, content_type_id, codename) FROM stdin;
 -- Name: auth_permission_id_seq; Type: SEQUENCE SET; Schema: public; Owner: student
 --
 
-SELECT pg_catalog.setval('auth_permission_id_seq', 42, true);
+SELECT pg_catalog.setval('auth_permission_id_seq', 45, true);
 
 
 --
@@ -934,7 +1026,7 @@ SELECT pg_catalog.setval('auth_permission_id_seq', 42, true);
 --
 
 COPY auth_user (id, password, last_login, is_superuser, username, first_name, last_name, email, is_staff, is_active, date_joined) FROM stdin;
-1	pbkdf2_sha256$12000$XZ8H3Z5GRJsY$yXeGqPOJu2bi2xtnt/xV0ypKuUCPZ3qrKjU56C5JTs4=	2014-06-16 00:01:07.184284+04	t	student				t	t	2014-06-15 21:24:13.833467+04
+1	pbkdf2_sha256$12000$XZ8H3Z5GRJsY$yXeGqPOJu2bi2xtnt/xV0ypKuUCPZ3qrKjU56C5JTs4=	2014-06-16 14:53:13.714837+04	t	student				t	t	2014-06-15 21:24:13.833467+04
 \.
 
 
@@ -980,6 +1072,109 @@ SELECT pg_catalog.setval('auth_user_user_permissions_id_seq', 1, false);
 --
 
 COPY django_admin_log (id, action_time, user_id, content_type_id, object_id, object_repr, action_flag, change_message) FROM stdin;
+1	2014-06-16 15:32:53.186235+04	1	8	1	Subject object	1	
+2	2014-06-16 15:32:57.035962+04	1	8	1	Subject object	2	No fields changed.
+3	2014-06-16 15:33:52.649908+04	1	8	2	Subject object	1	
+4	2014-06-16 15:34:24.881558+04	1	8	3	Subject object	1	
+5	2014-06-16 15:34:47.450275+04	1	8	4	Subject object	1	
+6	2014-06-16 15:36:03.924635+04	1	8	5	Subject object	1	
+7	2014-06-16 15:37:18.845674+04	1	7	46	Lecturer object	3	
+8	2014-06-16 15:37:36.905771+04	1	7	43	Lecturer object	3	
+9	2014-06-16 15:37:50.041779+04	1	7	45	Lecturer object	3	
+10	2014-06-16 15:38:03.612137+04	1	7	44	Lecturer object	3	
+11	2014-06-16 15:38:17.483288+04	1	7	42	Lecturer object	3	
+12	2014-06-16 15:38:24.567733+04	1	7	41	Lecturer object	3	
+13	2014-06-16 15:38:38.217843+04	1	7	40	Lecturer object	3	
+14	2014-06-16 15:40:15.530032+04	1	7	47	Lecturer object	1	
+15	2014-06-16 15:42:29.824371+04	1	7	48	Lecturer object	1	
+16	2014-06-16 15:43:28.130779+04	1	7	49	Lecturer object	1	
+17	2014-06-16 15:44:39.238526+04	1	7	50	Lecturer object	1	
+18	2014-06-16 15:46:45.812399+04	1	9	1	LectSubj object	1	
+19	2014-06-16 16:04:43.651062+04	1	11	1	Student object	1	
+20	2014-06-16 16:06:45.703989+04	1	11	2	Student object	1	
+21	2014-06-16 16:08:10.775696+04	1	11	3	Student object	1	
+22	2014-06-16 16:12:42.854757+04	1	11	4	Student object	1	
+23	2014-06-16 16:14:50.358063+04	1	11	5	Student object	1	
+24	2014-06-16 16:23:46.554565+04	1	12	1	Current object	1	
+25	2014-06-16 16:24:03.679023+04	1	12	2	Current object	1	
+26	2014-06-16 16:24:25.138719+04	1	12	3	Current object	1	
+27	2014-06-16 16:25:16.348548+04	1	12	4	Current object	1	
+28	2014-06-16 16:25:42.747632+04	1	12	5	Current object	1	
+29	2014-06-16 16:26:08.40274+04	1	13	1	Log object	1	
+30	2014-06-16 16:26:19.090272+04	1	13	2	Log object	1	
+31	2014-06-16 16:26:42.725199+04	1	13	3	Log object	1	
+32	2014-06-16 16:27:10.484197+04	1	13	4	Log object	1	
+33	2014-06-16 16:28:09.823184+04	1	13	5	Log object	1	
+34	2014-06-16 16:28:25.558828+04	1	13	6	Log object	1	
+35	2014-06-16 16:35:32.491195+04	1	10	7	Group object	3	
+36	2014-06-16 16:35:32.520619+04	1	10	6	Group object	3	
+37	2014-06-16 16:35:32.529329+04	1	10	5	Group object	3	
+38	2014-06-16 16:35:32.537213+04	1	10	4	Group object	3	
+39	2014-06-16 16:35:32.545727+04	1	10	3	Group object	3	
+40	2014-06-16 16:35:32.553898+04	1	10	2	Group object	3	
+41	2014-06-16 16:35:47.058272+04	1	10	8	Group object	1	
+42	2014-06-16 16:35:58.313999+04	1	10	9	Group object	1	
+43	2014-06-16 16:36:07.702799+04	1	10	10	Group object	1	
+44	2014-06-16 16:36:18.616423+04	1	10	9	Group object	2	Changed groupNum.
+45	2014-06-16 16:36:27.44842+04	1	10	9	Group object	2	Changed groupNum.
+46	2014-06-16 16:43:10.95741+04	1	9	1	LectSubj object	2	Changed subjectId.
+47	2014-06-16 16:47:09.708415+04	1	11	6	Student object	1	
+48	2014-06-16 16:47:26.020128+04	1	13	7	Log object	1	
+49	2014-06-16 16:59:10.237016+04	1	13	8	Log object	1	
+50	2014-06-16 17:07:24.613844+04	1	11	7	Student object	1	
+51	2014-06-16 17:07:44.829593+04	1	11	6	Student object	2	Changed surname.
+52	2014-06-16 17:08:35.98105+04	1	11	8	Student object	1	
+53	2014-06-16 17:09:11.863678+04	1	11	9	Student object	1	
+54	2014-06-17 19:37:44.507739+04	1	11	10	Student object	1	
+55	2014-06-17 19:37:49.507886+04	1	13	7	Log object	2	Changed mark and studId.
+56	2014-06-17 20:53:39.293361+04	1	8	6	Subject object	1	
+57	2014-06-17 20:53:46.653514+04	1	12	6	Current object	1	
+58	2014-06-17 20:56:25.264848+04	1	8	6	Subject object	3	
+59	2014-06-17 21:02:19.268863+04	1	12	3	Current object	2	Changed subjectId.
+60	2014-06-17 21:04:09.648272+04	1	12	3	Current object	2	Changed subjectId.
+61	2014-06-17 22:51:13.191405+04	1	14	1	Absence object	1	
+62	2014-06-17 22:51:49.65777+04	1	14	2	Absence object	1	
+63	2014-06-17 22:52:22.555624+04	1	14	3	Absence object	1	
+64	2014-06-17 22:52:29.004226+04	1	14	4	Absence object	1	
+65	2014-06-17 22:52:32.944018+04	1	14	5	Absence object	1	
+66	2014-06-18 22:36:25.835124+04	1	15	1	GroupSubj object	1	
+67	2014-06-18 22:36:33.837948+04	1	15	2	GroupSubj object	1	
+68	2014-06-18 22:36:42.50814+04	1	15	3	GroupSubj object	1	
+69	2014-06-18 22:36:50.589202+04	1	15	4	GroupSubj object	1	
+70	2014-06-18 22:37:21.83897+04	1	15	5	GroupSubj object	1	
+71	2014-06-18 22:37:30.507697+04	1	15	6	GroupSubj object	1	
+72	2014-06-18 22:37:35.473431+04	1	15	7	GroupSubj object	1	
+73	2014-06-18 22:37:41.57895+04	1	15	8	GroupSubj object	1	
+74	2014-06-18 22:38:43.057475+04	1	15	9	GroupSubj object	1	
+75	2014-06-18 22:38:49.87468+04	1	15	10	GroupSubj object	1	
+76	2014-06-18 22:39:05.954537+04	1	15	11	GroupSubj object	1	
+77	2014-06-18 22:39:22.873578+04	1	15	12	GroupSubj object	1	
+78	2014-06-18 22:40:03.46079+04	1	15	13	GroupSubj object	1	
+79	2014-06-18 22:40:17.788517+04	1	15	14	GroupSubj object	1	
+80	2014-06-18 22:40:46.274047+04	1	15	14	GroupSubj object	3	
+81	2014-06-18 22:40:46.292081+04	1	15	13	GroupSubj object	3	
+82	2014-06-18 22:40:46.300296+04	1	15	12	GroupSubj object	3	
+83	2014-06-18 22:40:46.308826+04	1	15	11	GroupSubj object	3	
+84	2014-06-18 22:40:46.317031+04	1	15	10	GroupSubj object	3	
+85	2014-06-18 22:40:46.325276+04	1	15	9	GroupSubj object	3	
+86	2014-06-18 22:40:46.333653+04	1	15	8	GroupSubj object	3	
+87	2014-06-18 22:40:46.342017+04	1	15	7	GroupSubj object	3	
+88	2014-06-18 22:40:46.350236+04	1	15	6	GroupSubj object	3	
+89	2014-06-18 22:40:46.358552+04	1	15	5	GroupSubj object	3	
+90	2014-06-18 22:40:46.367003+04	1	15	4	GroupSubj object	3	
+91	2014-06-18 22:40:46.375417+04	1	15	3	GroupSubj object	3	
+92	2014-06-18 22:40:46.383736+04	1	15	2	GroupSubj object	3	
+93	2014-06-18 22:40:46.392039+04	1	15	1	GroupSubj object	3	
+94	2014-06-18 22:41:02.405416+04	1	15	15	GroupSubj object	1	
+95	2014-06-18 22:41:13.440759+04	1	15	16	GroupSubj object	1	
+96	2014-06-18 22:41:25.94136+04	1	15	17	GroupSubj object	1	
+97	2014-06-18 22:41:38.640804+04	1	15	18	GroupSubj object	1	
+98	2014-06-18 22:41:48.878182+04	1	15	19	GroupSubj object	1	
+99	2014-06-18 22:42:00.335079+04	1	15	20	GroupSubj object	1	
+100	2014-06-18 23:25:49.66968+04	1	14	2	Absence object	2	Changed absence.
+101	2014-06-18 23:25:56.101323+04	1	14	4	Absence object	2	Changed absence.
+102	2014-06-18 23:37:38.134403+04	1	14	4	Absence object	2	Changed absence.
+103	2014-06-18 23:37:42.771792+04	1	14	2	Absence object	2	Changed absence.
 \.
 
 
@@ -987,7 +1182,7 @@ COPY django_admin_log (id, action_time, user_id, content_type_id, object_id, obj
 -- Name: django_admin_log_id_seq; Type: SEQUENCE SET; Schema: public; Owner: student
 --
 
-SELECT pg_catalog.setval('django_admin_log_id_seq', 1, false);
+SELECT pg_catalog.setval('django_admin_log_id_seq', 103, true);
 
 
 --
@@ -1009,6 +1204,7 @@ COPY django_content_type (id, name, app_label, model) FROM stdin;
 12	current	appTraining	current
 13	log	appTraining	log
 14	absence	appTraining	absence
+15	group subj	appTraining	groupsubj
 \.
 
 
@@ -1016,7 +1212,7 @@ COPY django_content_type (id, name, app_label, model) FROM stdin;
 -- Name: django_content_type_id_seq; Type: SEQUENCE SET; Schema: public; Owner: student
 --
 
-SELECT pg_catalog.setval('django_content_type_id_seq', 14, true);
+SELECT pg_catalog.setval('django_content_type_id_seq', 15, true);
 
 
 --
@@ -1025,6 +1221,7 @@ SELECT pg_catalog.setval('django_content_type_id_seq', 14, true);
 
 COPY django_session (session_key, session_data, expire_date) FROM stdin;
 vaqiki8n2h198ybz1b5utanymk4o2nqq	YmQ0MTQyNmZjYzc5MzYxYzk0YTVhNDQ4Y2FlNDY5YmFkYmQ1NDYzNDp7Il9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIiwiX2F1dGhfdXNlcl9pZCI6MX0=	2014-06-30 00:01:07.192931+04
+ox9prik3w5xp12y2kwn85615eximysvd	YmQ0MTQyNmZjYzc5MzYxYzk0YTVhNDQ4Y2FlNDY5YmFkYmQ1NDYzNDp7Il9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIiwiX2F1dGhfdXNlcl9pZCI6MX0=	2014-06-30 14:53:13.723346+04
 \.
 
 
@@ -1050,6 +1247,14 @@ ALTER TABLE ONLY "appTraining_current"
 
 ALTER TABLE ONLY "appTraining_group"
     ADD CONSTRAINT "appTraining_group_pkey" PRIMARY KEY (id);
+
+
+--
+-- Name: appTraining_groupsubj_pkey; Type: CONSTRAINT; Schema: public; Owner: student; Tablespace: 
+--
+
+ALTER TABLE ONLY "appTraining_groupsubj"
+    ADD CONSTRAINT "appTraining_groupsubj_pkey" PRIMARY KEY (id);
 
 
 --
@@ -1242,6 +1447,20 @@ CREATE INDEX "appTraining_current_subjectId_id" ON "appTraining_current" USING b
 
 
 --
+-- Name: appTraining_groupsubj_groupId_id; Type: INDEX; Schema: public; Owner: student; Tablespace: 
+--
+
+CREATE INDEX "appTraining_groupsubj_groupId_id" ON "appTraining_groupsubj" USING btree ("groupId_id");
+
+
+--
+-- Name: appTraining_groupsubj_subjectId_id; Type: INDEX; Schema: public; Owner: student; Tablespace: 
+--
+
+CREATE INDEX "appTraining_groupsubj_subjectId_id" ON "appTraining_groupsubj" USING btree ("subjectId_id");
+
+
+--
 -- Name: appTraining_lectsubj_lecturerId_id; Type: INDEX; Schema: public; Owner: student; Tablespace: 
 --
 
@@ -1389,6 +1608,22 @@ ALTER TABLE ONLY "appTraining_current"
 
 ALTER TABLE ONLY "appTraining_current"
     ADD CONSTRAINT "appTraining_current_subjectId_id_fkey" FOREIGN KEY ("subjectId_id") REFERENCES "appTraining_subject"(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: appTraining_groupsubj_groupId_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: student
+--
+
+ALTER TABLE ONLY "appTraining_groupsubj"
+    ADD CONSTRAINT "appTraining_groupsubj_groupId_id_fkey" FOREIGN KEY ("groupId_id") REFERENCES "appTraining_group"(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: appTraining_groupsubj_subjectId_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: student
+--
+
+ALTER TABLE ONLY "appTraining_groupsubj"
+    ADD CONSTRAINT "appTraining_groupsubj_subjectId_id_fkey" FOREIGN KEY ("subjectId_id") REFERENCES "appTraining_subject"(id) DEFERRABLE INITIALLY DEFERRED;
 
 
 --

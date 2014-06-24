@@ -1,80 +1,104 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from appTraining.models import Lecturer,Group,Subject,Absence,Current,LectSubj,Log,Student,GroupSubj
-
+import json
 def Load(request):
-    response = HttpResponse()
+    callback = request.GET.get('callback', '')
     groups = Group.objects.all()
-    gp = []
+    arrgroup = []
     for i in groups:
-        gp.append(i.groupNum + "\n")
-    response.content = gp
-    return response;
-#   return HttpResponse(request.GET['callback'] + "(" + gp + ");");
-
-#def getListGroupSubj(request):
+        arrgroup.append(i.groupNum)
+    response = json.dumps(arrgroup)
+    response = callback + '(' + response + ');'
+    return HttpResponse(response)
 
 def getListSubject(request):
-    response = HttpResponse()
+    callback = request.GET.get('callback', '')   
     subjects = Subject.objects.get(id = 5)
-    currents = Current.objects.filter(subjectId= subjects.id)
-    logs = Log.objects.filter(currentId=currents)
-    mark=[]
-    day=[]
+    currents = Current.objects.filter(subjectId = subjects.id)
+    logs     = Log.objects.filter(currentId = currents)
+    students = Student.objects.filter(id = logs)
+    absences = Absence.objects.filter(studId = students) 
+    mark = []
+    day = []
+    ab = []
+    stud = []
+
     for cr in currents:
-        day.append(cr.day)
-    for log in logs:
-        mark.append(log.mark)
-    response.content = str(day)+str(mark)+str(log.studId)
-    return response;
+        for log in logs:
+            for a in absences:
+                abc=({
+                    'day':str(cr.day),
+                    'id':log.studId.id,
+                    'mark':log.mark,
+                    'absence':a.absence,
+                })
+                stud.append(abc)       
+       # stud.append(day)
+    response = json.dumps(stud)
+    response = callback + '(' + response + ');'
+    return HttpResponse(response,content_type="application/json");
 
 def getListGroup(request):
-    response = HttpResponse()
-    group = Group.objects.get(id=9)
+    callback = request.GET.get('callback', '')
+    group = Group.objects.get(groupNum=request.GET['groupnum'])
     students = Student.objects.filter(groupId = group.id)
     subjects = GroupSubj.objects.filter(groupId = group.id)
-   # subjects1 = Subject.objects.filter(id = subjects.subjectId)
+    arrjson = []
     stud=[]
     subj=[]
     for st in students:
-        stud.append(st.name+st.surname)
+        response = ({
+             'id' : st.id,
+             'name' : st.name,
+             'surname' : st.surname,
+        })
+        stud.append(response)
     for sj in subjects:
-        subj.append(sj.subjectId.name)
-    response.content = str(stud)+str(subj)
-    return response;
-    #return HttpResponse(request.GET['callback'] + "(" + str(arrstud) + ");");
-
-
-def getListLog(request):
-    response = HttpResponse()
-    marks = Log.objects.all().filter(mark = 7)
-    mark = []
-    for m in marks:
-        mark.append(m.mark)
-    response.content = str(mark)
-    return response;
-
-def getListSSMark(request):
-    response = HttpResponse()
-    subj = Log.objects.all().filter(studId = 10)
-#    stud = Log.objects.all().filter(Current.objects.id = 8)
-    r=Subject.objects.get(name="History")
-    r1=Current.objects.filter(subjectId=r.id)
-    r2=Log.objects.filter(currentId=r1)
-#    r3=Absence.objects.filter(studId=r2.studId.id)
-    marks = Log.objects.all()
-    arrMark = []
-    for i in r2: 
-        arrMark.append(str(i.mark)+str(i.studId.name))
-    response.content =str(arrMark)
-    return response;
+        response1 = ({
+            'id' : sj.subjectId.id,
+            'name' : sj.subjectId.name,
+        })
+        subj.append(response1)
+#   response1 = json.dumps(stud)
+#   response = json.dumps(subj)
+    arrjson.append(subj)
+    arrjson.append(stud)
+    response = json.dumps(arrjson) 
+    response = callback + '(' + response + ');'
+    return HttpResponse(response,content_type="application/json");
 
 def getListLecturer(request):
-    response = HttpResponse()
+    callback = request.GET.get('callback', '')
     lecturers = Lecturer.objects.all()
-    l = []  
-    for lect in lecturers:
-        l.append(lect.name+"\n"+lect.surname+"\n")
-    response.content = l
-    return response;
+    lect =[] 
+    for lt in lecturers:
+        response = ({
+            'name' : lt.name,
+            'surname' : lt.surname,
+            'email' : lt.email,
+            'phoneNum' : lt.phoneNum,
+        })
+        lect.append(response)
+        response = json.dumps(lect)
+    response = callback + '(' + response + ');'
+    return HttpResponse(response, content_type="application/json");
 
+def getListStudent(request):
+    callback = request.GET.get('callback', '')
+    students = Student.objects.all()
+    stud = [] 
+    for st in students:
+        response = ({
+            'name' : st.name,
+            'surname' : st.surname,
+            'email' : st.email,
+            'phoneNum' : st.phoneNum,
+        })
+        stud.append(response)
+        response = json.dumps(stud)
+    response = callback + '(' + response + ');'
+    return HttpResponse(response, content_type="application/json");
+#def funcallback(request,response):
+ #   callback = request.GET.get('callback', '')
+  #  response = callback + '(' + response + ');'
