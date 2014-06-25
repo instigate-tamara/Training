@@ -29,5 +29,5 @@ class SimpleTest(unittest.TestCase):
 
     def test_index(self):
         client = Client()
-        response = client.get('/customer/index/')
+        response = client.get('/training/student')
         self.assertEqual(response.status_code, 200)
