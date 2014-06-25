@@ -1,5 +1,4 @@
 from django.contrib import admin
-
 # Register your models here.
 from appTraining.models import Student,Lecturer,Subject,LectSubj,Group,Current,Log,Absence,GroupSubj
 class StudentAdmin(admin.ModelAdmin):
