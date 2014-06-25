@@ -6,8 +6,12 @@ def Load(request):
     callback = request.GET.get('callback', '')
     groups = Group.objects.all()
     arrgroup = []
-    for i in groups:
-        arrgroup.append(i.groupNum)
+    for group in groups:
+        namegroup=({
+            'id':group.id,
+            'groupNum':group.groupNum,
+        })
+        arrgroup.append(namegroup)
     response = json.dumps(arrgroup)
     response = callback + '(' + response + ');'
     return HttpResponse(response)
@@ -26,14 +30,14 @@ def getListSubject(request):
 
     for cr in currents:
         for log in logs:
-            for a in absences:
-                abc=({
-                    'day':str(cr.day),
-                    'id':log.studId.id,
-                    'mark':log.mark,
-                    'absence':a.absence,
-                })
-                stud.append(abc)       
+           # for a in absences:
+            abc=({
+               'day':str(cr.day),
+               'id':log.studId.id,
+               'mark':log.mark,
+            #        'absence':a.absence,
+            })
+            stud.append(abc)       
        # stud.append(day)
     response = json.dumps(stud)
     response = callback + '(' + response + ');'
@@ -41,30 +45,31 @@ def getListSubject(request):
 
 def getListGroup(request):
     callback = request.GET.get('callback', '')
-    group = Group.objects.get(groupNum=request.GET['groupnum'])
+    group = Group.objects.get(id=request.GET['groupid'])
     students = Student.objects.filter(groupId = group.id)
     subjects = GroupSubj.objects.filter(groupId = group.id)
     arrjson = []
     stud=[]
     subj=[]
+    t=[]
+    #$t.append('student')
     for st in students:
-        response = ({
-             'id' : st.id,
-             'name' : st.name,
-             'surname' : st.surname,
-        })
+        response = {
+            'id' : st.id,
+            'name' : st.name,
+            'surname' : st.surname,
+        }
         stud.append(response)
     for sj in subjects:
-        response1 = ({
+        response1 = {
             'id' : sj.subjectId.id,
             'name' : sj.subjectId.name,
-        })
+        }
         subj.append(response1)
-#   response1 = json.dumps(stud)
-#   response = json.dumps(subj)
+    t.append(subj) 
     arrjson.append(subj)
     arrjson.append(stud)
-    response = json.dumps(arrjson) 
+    response = json.dumps(json) 
     response = callback + '(' + response + ');'
     return HttpResponse(response,content_type="application/json");
 

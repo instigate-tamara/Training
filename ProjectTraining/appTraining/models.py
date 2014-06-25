@@ -34,15 +34,9 @@ class Student(models.Model):
     phoneNum = models.CharField(max_length = 15)
     email = models.EmailField(max_length = 30)
 
-#class Auditorium(models.Model):
- #   id = models.AutoField(primary_key = True)
-  #  auditNum = models.CharField(max_length = 10)
-   # employment = models.BooleanField(default = True)
-
 class Current(models.Model):
     id = models.AutoField(primary_key = True)
     day = models.DateField('date published')
-   # auditId = models.ForeignKey(Auditorium)
     subjectId = models.ForeignKey(Subject)
     lecturerId = models.ForeignKey(Lecturer)
 
