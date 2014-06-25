@@ -13,8 +13,5 @@ urlpatterns = patterns('',
     url(r'^training/group$','appTraining.views.getListGroup'),   # Stanal xmbi matyan@
     url(r'^training/subject','appTraining.views.getListSubject'), #Trvac ararkayic 
     url(r'^training/student$','appTraining.views.getListStudent'), #usanoxneri masin informacia
-#   url(r'^training/uniqueStudent$','appTraining.views.UniqueStud')
-
-
 )
 
