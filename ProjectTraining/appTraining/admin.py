@@ -1,8 +1,11 @@
 from django.contrib import admin
+
 # Register your models here.
-from appTraining.models import Student,Lecturer,Subject,LectSubj,Group,Current,Log,Absence,GroupSubj
+from appTraining.models import Student,Lecturer,Subject,LectSubj,Group,Current,GroupSubj,Log
 class StudentAdmin(admin.ModelAdmin):
-    list_display = ('id','name','surname','groupId','phoneNum','email')
+    list_display = ('id','name','surname','getGroupNum','phoneNum','email')    
+    def getGroupNum(self, obj):
+       return obj.groupId.groupNum
 admin.site.register(Student,StudentAdmin)
 
 class LecturerAdmin(admin.ModelAdmin):
@@ -18,7 +21,11 @@ class LectSubjAdmin(admin.ModelAdmin):
 admin.site.register(LectSubj,LectSubjAdmin)
 
 class GroupSubjAdmin(admin.ModelAdmin):
-    list_display = ('groupId','subjectId')
+    list_display = ('getGroupNum','getSubjectName')
+    def getGroupNum(self, obj):
+       return obj.groupId.groupNum
+    def getSubjectName(self, obj):
+       return obj.subjectId.id
 admin.site.register(GroupSubj,GroupSubjAdmin)
 
 class GroupAdmin(admin.ModelAdmin):
@@ -26,13 +33,17 @@ class GroupAdmin(admin.ModelAdmin):
 admin.site.register(Group,GroupAdmin)
 
 class CurrentAdmin(admin.ModelAdmin):
-    list_display = ('id','day','subjectId','lecturerId')
+    list_display = ('id','day','getSubjectName','lecturerId')
+    def getSubjectName(self, obj):
+       return obj.subjectId.id
+
 admin.site.register(Current,CurrentAdmin)
 
 class LogAdmin(admin.ModelAdmin):
-    list_display = ('mark','id','studId','currentId')
+    list_display = ('id','mark','getStudentName','getCurrentDay','absence')
+    def getStudentName(self, obj):
+       return obj.studId.name
+    def getCurrentDay(self, obj):
+       return obj.currentId.day
 admin.site.register(Log,LogAdmin)
 
-class AbsenceAdmin(admin.ModelAdmin):
-    list_display = ('studId','absence')
-admin.site.register(Absence, AbsenceAdmin)

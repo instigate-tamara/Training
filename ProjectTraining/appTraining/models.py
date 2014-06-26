@@ -44,9 +44,9 @@ class Log(models.Model):
     mark = models.IntegerField(default = 0)
     studId = models.ForeignKey(Student)
     currentId = models.ForeignKey(Current)
-
-class Absence(models.Model):
-    studId = models.ForeignKey(Student)
     absence = models.BooleanField(default = False)
+#class Absence(models.Model):
+ #   studId = models.ForeignKey(Student)
+  #  absence = models.BooleanField(default = False)
 
 

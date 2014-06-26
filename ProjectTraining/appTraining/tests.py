@@ -1,7 +1,9 @@
 from django.test import TestCase
-import unittest
+from django.utils import unittest
 from django.test import Client
+from django.test.client import RequestFactory
 from appTraining.models import Group,Lecturer,Student
+from appTraining.views import Load
 # Create your tests here.
 class GroupTestCase(TestCase):
     def setUp(self):
@@ -20,14 +22,11 @@ class StudentTestCase(TestCase):
         Student.objects.create(name = "Aram", surname = "Hovsepyan",groupId=Group(id=1), phoneNum = "058 897-564" )
     def testStudent(self):
         stud = Student.objects.get(name = "Aram", surname = "Hovsepyan", groupId=Group(id=1), phoneNum = "058 897-564")
-
-class SimpleTest(unittest.TestCase):
-    def test_details(self):
-        client = Client()
-        response = client.get('/training/lecturer')
-        self.assertEqual(response.status_code, 200)
-
-    def test_index(self):
-        client = Client()
-        response = client.get('/training/student')
+        
+class LoadTest(unittest.TestCase):
+    def setUp(self):
+        self.factory = RequestFactory()
+    def test_load(self):
+        request = self.factory.get('/training')
+        response = Load(request)
         self.assertEqual(response.status_code, 200)

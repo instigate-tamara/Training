@@ -1,49 +1,44 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from appTraining.models import Lecturer,Group,Subject,Absence,Current,LectSubj,Log,Student,GroupSubj
+from appTraining.models import Lecturer,Group,Subject,Current,LectSubj,Student,GroupSubj,Log
 import json
 def Load(request):
-    callback = request.GET.get('callback', '')
+#    callback = request.GET.get('callback', '')
     groups = Group.objects.all()
     arrgroup = []
     for group in groups:
-        namegroup=({
+        namegroup={
             'id':group.id,
             'groupNum':group.groupNum,
-        })
+        }
         arrgroup.append(namegroup)
-    response = json.dumps(arrgroup)
-    response = callback + '(' + response + ');'
+    response1 = json.dumps(arrgroup)
+    response =  response1 
     return HttpResponse(response)
 
 def getListSubject(request):
     callback = request.GET.get('callback', '')   
     subjects = Subject.objects.get(id = 5)
     currents = Current.objects.filter(subjectId = subjects.id)
-    logs     = Log.objects.filter(currentId = currents)
+    logs = Log.objects.filter(currentId = currents)
     students = Student.objects.filter(id = logs)
-    absences = Absence.objects.filter(studId = students) 
-    mark = []
-    day = []
-    ab = []
     stud = []
-
     for cr in currents:
         for log in logs:
-           # for a in absences:
-            abc=({
-               'day':str(cr.day),
-               'id':log.studId.id,
-               'mark':log.mark,
-            #        'absence':a.absence,
-            })
+            abc={
+                'day':str(cr.day),
+                'id':log.studId.id,
+                'mark':log.mark,
+      #          'absence':log.absence,
+            }
             stud.append(abc)       
-       # stud.append(day)
     response = json.dumps(stud)
     response = callback + '(' + response + ');'
-    return HttpResponse(response,content_type="application/json");
-
+    httpResponse = HttpResponse();
+    httpResponse.content = response;
+    return httpResponse;
 def getListGroup(request):
+    return HttpResponse(response,content_type="application/json");
     callback = request.GET.get('callback', '')
     group = Group.objects.get(id=request.GET['groupid'])
     students = Student.objects.filter(groupId = group.id)
@@ -51,25 +46,27 @@ def getListGroup(request):
     arrjson = []
     stud=[]
     subj=[]
-    t=[]
-    #$t.append('student')
+    sendInformation = {
+        'student':[],
+        'subject':[]
+    }
     for st in students:
-        response = {
-            'id' : st.id,
-            'name' : st.name,
-            'surname' : st.surname,
-        }
-        stud.append(response)
+       studData = {
+            "id" :  st.id,
+            'name' :  st.name,
+            'surname' :  st.surname,
+       }
+       sendInformation["student"].append(studData)
+    
     for sj in subjects:
-        response1 = {
+        subjData = {
             'id' : sj.subjectId.id,
             'name' : sj.subjectId.name,
         }
-        subj.append(response1)
-    t.append(subj) 
-    arrjson.append(subj)
+        sendInformation["subject"].append(subjData)
+    stud.append(sendInformation)
     arrjson.append(stud)
-    response = json.dumps(json) 
+    response = json.dumps(arrjson) 
     response = callback + '(' + response + ');'
     return HttpResponse(response,content_type="application/json");
 
@@ -78,12 +75,12 @@ def getListLecturer(request):
     lecturers = Lecturer.objects.all()
     lect =[] 
     for lt in lecturers:
-        response = ({
+        response = {
             'name' : lt.name,
             'surname' : lt.surname,
             'email' : lt.email,
             'phoneNum' : lt.phoneNum,
-        })
+        }
         lect.append(response)
         response = json.dumps(lect)
     response = callback + '(' + response + ');'
@@ -94,12 +91,12 @@ def getListStudent(request):
     students = Student.objects.all()
     stud = [] 
     for st in students:
-        response = ({
+        response = {
             'name' : st.name,
             'surname' : st.surname,
             'email' : st.email,
             'phoneNum' : st.phoneNum,
-        })
+        }
         stud.append(response)
         response = json.dumps(stud)
     response = callback + '(' + response + ');'
