@@ -27,6 +27,11 @@ class LoadTest(unittest.TestCase):
     def setUp(self):
         self.factory = RequestFactory()
     def test_load(self):
-        request = self.factory.get('/training')
-        response = Load(request)
+        c = Client()
+        response = c.post('/training',{'groupNum': 'group1'})
         self.assertEqual(response.status_code, 200)
+        response = c.get('/training')
+        response.content
+    #    request = self.factory.get('/training')
+     #   response = Load(request)
+ #       self.assertEqual(response.status_code, 200)
