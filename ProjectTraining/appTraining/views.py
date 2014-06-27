@@ -25,9 +25,9 @@ def getListSubject(request):
     logs = Log.objects.filter(currentId = currents)
     students = Student.objects.filter(id = logs)
     student = []
-    for cr in currents:
+    for current in currents:
         roll = {
-            'day' : str(cr.day),
+            'day' : str(current.day),
             'student': [],
         }
         for log in logs:
